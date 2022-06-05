@@ -1,0 +1,11 @@
+- Declare a setter and a getter function for the `supply` state variable
+- Add a public state variable of type address called `owner`
+- Declare the `constructor` and initialize all the state variables in the constructor. The `owner` should be initialized with the address of the account that deploys the contract
+- Modify the `changeTokens()` function in such a way that it changes the state variable called tokens.
+- Add a function so that the contract can receive ETH by sending it directly to the contract address
+- Add a function that returns the contract's balance
+- Add a function that transfers the entire balance of the contract to another address
+- Add a restriction so that only the `owner` can transfer the balance of the contract to another address
+- Add a function called `start()` that adds the address of the account that calls it to the dynamic array called `players`
+- Declare a function that concatenates two strings
+  - Note: Since Solidity does not offer a native way to concatenate strings use abi.encodePacked() to do that.

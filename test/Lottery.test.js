@@ -5,7 +5,7 @@ const { ethers, waffle } = require("hardhat");
 
 describe("Lottery Contract", function () {
   // Declaring outside of the tests to have access inside them
-  let owner, addr1, addr2, lottery;
+  let owner, addr1, addr2, addrs, lottery;
   let provider = waffle.provider;
 
   beforeEach(async () => {
