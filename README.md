@@ -1,3 +1,4 @@
+## Knowledge Test
 - Add a public state variable of type address called `owner`
 - Declare the `constructor` and initialize all the state variables in the constructor. The `owner` should be initialized with the address of the account that deploys the contract
 - Modify the `changeTokens()` function in such a way that it changes the state variable called tokens.
@@ -7,4 +8,4 @@
 - Add a restriction so that only the `owner` can call `transferAll()`
 - Add a function called `start()` that adds the address of the account that calls it to the dynamic array called `players`
 - Declare a function called `concatenate` that takes two strings as parameters and returns them concatenated
-  - Note: Since Solidity does not offer a native way to concatenate strings use abi.encodePacked() to do that
+- Note: Since Solidity does not offer a native way to concatenate strings use abi.encodePacked() to do that
