@@ -3,8 +3,6 @@
 pragma solidity >=0.5.0 <0.9.0;
 
 contract KnowledgeTest {
-    string name = "Cryptos";
-    uint256 supply;
     string[] public tokens = ["BTC", "ETH"];
     address[] public players;
 
