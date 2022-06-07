@@ -5,8 +5,6 @@ Please fork this repository to complete the two projects in the course locally.
 
 All the normal hardhat tooling is available in this repository, such as `npx hardhat test` and `npx hardhat compile`.
 
-Please run the test suite against your contracts to check your solutions :)
-
 ## Knowledge Test
 
 Please complete each of the following tasks by adding or editing code in the `KnowledgeTest.sol` contract after finishing section 1:
