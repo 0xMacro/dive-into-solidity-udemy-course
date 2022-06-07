@@ -40,6 +40,12 @@ describe("Knowledge Test", function () {
   });
 
   it("Gets the balance of the contract", async () => {
+    await addr1.sendTransaction({
+      to: contract.address,
+      // parseEther("0.1") will return "100000000000000000" (which is the equivalent in wei)
+      value: parseEther("0.1"),
+    });
+
     const contractBalance = await provider.getBalance(contract.address);
 
     const fetchedContractBalance = await contract.getBalance();
