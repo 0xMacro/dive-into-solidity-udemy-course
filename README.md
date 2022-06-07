@@ -17,7 +17,7 @@ Please complete each of the following tasks by adding or editing code in the `Kn
 - Make it so that the contract can receive ETH by sending it directly to the contract address
 - Add a function called `getBalance()` that returns the contract's balance
 - Add a function called `transferAll()` that takes an argument of type `address` and transfers the entire balance of the contract to it
-- Add a restriction so that only the `owner` can call `transferAll()`, otherwise, make it revert with an `"ONLY_OWNER"` error
+- Add a restriction so that only the `owner` can call `transferAll()`, otherwise, make it revert with an `"ONLY_OWNER"` error (use a require statement)
 - Add a function called `start()` that adds the address of the account that calls it to the dynamic array called `players`
 - Declare a function called `concatenate` that takes two strings as parameters and returns them concatenated
 - Note: Since Solidity does not offer a native way to concatenate strings use abi.encodePacked() to do that
