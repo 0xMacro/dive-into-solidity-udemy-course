@@ -24,6 +24,16 @@ Once you are done, run `npx hardhat test` to check your work :D
 
 ## Lottery Contract
 
+The Lottery contract is a smart contract where people can enter the lottery by sending one ETH to the contract. When the owner of the contract decides, they can call the function `pickWinner` which will select a random player and award them with all of the ETH from the lottery.
+
+Technical Spec for Lottery contract: 
+    - Anyone’s able to send a fixed amount of Ether to the contract’s address
+    - The address of a sender will be stored in a dynamic array called players. The same user can send more than one transaction to have more chances of winning. The same principle as in a classical lottery where you can buy as many tickets as you want at a fixed price per ticket
+    - The contract has an owner with special permission
+    - After there are at least 3 players, the owner can call a function that makes the contract pick a random player from the list which will be the winner 
+    - The contract transfers the entire balance to the winner’s address, the players array is reset and the lottery is now ready to play again
+
+
 The `Lottery.sol` contract is full of comments with todo tasks. 
 Please complete all of the todos listed in the comments in the Lottery contract, and then run `npx hardhat test` to check your work. 
 There is a solution lecture at the end of section 2 on Udemy, which explains the contract line by line.

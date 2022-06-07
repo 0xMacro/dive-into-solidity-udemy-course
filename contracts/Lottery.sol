@@ -38,9 +38,9 @@ contract Lottery {
 
         // TODO: append the winner to the gameWinners array
 
-        // TODO: transfer the entire contract's balance to the winner
-
         // TODO: reset the lottery for the next round
+
+        // TODO: transfer the entire contract's balance to the winner
     }
 
     // helper function that returns a big random integer
