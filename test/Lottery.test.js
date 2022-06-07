@@ -24,14 +24,14 @@ describe("Lottery Contract", function () {
     });
 
     it("Only owner can call getBalance", async () => {
-      // Delete this line
+      //TODO: Delete this line
       assert.fail();
     });
   });
 
   describe("Playing", () => {
     it("Reverts if not exactly 0.1 ETH", async () => {
-      // Delete this line
+      //TODO: Delete this line
       assert.fail();
     });
 
