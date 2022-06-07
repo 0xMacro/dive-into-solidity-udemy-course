@@ -1,11 +1,10 @@
-const { expect, assert } = require("chai");
+const { expect } = require("chai");
 const { BigNumber } = require("ethers");
 const { parseEther, formatEther } = require("ethers/lib/utils");
 const { ethers, waffle } = require("hardhat");
 
-describe.only("Lottery Contract", function () {
-  // Declaring outside of the tests to have access inside them
-  let owner, addr1, addr2, addrs, lottery;
+describe("Lottery Contract", function () {
+  let owner, addr1, addr2, lottery;
   let provider = waffle.provider;
 
   beforeEach(async () => {
@@ -17,28 +16,20 @@ describe.only("Lottery Contract", function () {
   });
 
   describe("Only owner", () => {
-    // The pickWinner() function should only be callable by the owner
     it("Only owner can pick a winner", async () => {
       await expect(lottery.connect(addr1).pickWinner()).to.be.revertedWith(
         "ONLY_OWNER"
       );
     });
 
-    // The getBalance() function should only be callable by the owner
     it("Only owner can call getBalance", async () => {
-      //TODO: Delete this line
-      assert.fail();
+      await expect(lottery.connect(addr1).getBalance()).to.be.revertedWith(
+        "ONLY_OWNER"
+      );
     });
   });
 
   describe("Playing", () => {
-    // If an user tries to join the game by sending money to the contract, but the amount sent is not exactly 0.1 ETH, the contract should revert
-    it("Reverts if not exactly 0.1 ETH", async () => {
-      //TODO: Delete this line
-      assert.fail();
-    });
-
-    // Allows an user to send 0.1 ETH to the contract and be added to the players of the game
     it("Allows a player to enter", async () => {
       await addr1.sendTransaction({
         to: lottery.address,
@@ -46,36 +37,49 @@ describe.only("Lottery Contract", function () {
         value: parseEther("0.1"),
       });
 
-      // TODO: Check if the contract's balance increased
-      let newBalance;
+      // Checking if the contract's balance increased
+      const newBalance = await lottery.getBalance();
       expect(newBalance).to.be.equal(parseEther("0.1"));
 
-      // TODO: Check if the winner got added to the winners array
-      // Public getters generated for arrays require an index to be passed, so check the 0 index (where this new player should be)
-      let newPlayer;
+      // Public getters generated for arrays require an index to be passed, so we'll check the 0 index (where this new player should be)
+      const newPlayer = await lottery.players(0);
       expect(newPlayer).to.be.equal(addr1.address);
     });
 
-    // pickWinner() can't be called if less than 4 players have joined the lottery
     it("Can't pick a winner if less than 4 players", async () => {
-      // Delete this line
-      assert.fail();
+      await addr1.sendTransaction({
+        to: lottery.address,
+        value: parseEther("0.1"),
+      });
+      await addr2.sendTransaction({
+        to: lottery.address,
+        value: parseEther("0.1"),
+      });
+      await expect(lottery.pickWinner()).to.be.revertedWith(
+        "NOT_ENOUGH_PLAYERS"
+      );
     });
 
-    // pickWinner() should randomly select an address from the players[] array and send it the contract's balance
     it("Can pick a winner and winner gets paid", async () => {
       // Make 4 players enter the game
-      for (let i = 0; i < 4; i++) {}
+      for (let i = 0; i < 4; i++) {
+        await addrs[i].sendTransaction({
+          to: lottery.address,
+          value: parseEther("0.1"),
+        });
+      }
 
       await lottery.pickWinner();
+      const winner = await lottery.gameWinners(0);
 
-      // TODO: Get the lottery winner
-      let winner;
-
-      // TODO: Check if the winner is one of the 4 players
+      // The winner should be one of the 4 players
+      expect(addrs.slice(0, 4).map((player) => player.address)).to.include(
+        winner
+      );
 
       const winnerBalance = await provider.getBalance(winner);
-      // TODO: With hardhat, by default, all test signers have 10000 ETH, so check if the winner has more than that
+      // With hardhat, by default, all test signers have 10000 ETH, so we check if the winner has more than that
+      expect(winnerBalance.gt(BigNumber.from(parseEther("10000")))).to.be.true;
     });
   });
 });
