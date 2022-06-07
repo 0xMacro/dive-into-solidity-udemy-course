@@ -24,7 +24,7 @@ Once you are done, run `npx hardhat test` to check your work :D
 
 ## Lottery Contract
 
-The Lottery contract is a smart contract where people can enter the lottery by sending one ETH to the contract. When the owner of the contract decides, they can call the function `pickWinner` which will select a random player and award them with all of the ETH from the lottery.
+The Lottery contract is a smart contract where people can enter the lottery by sending 0.1 ETH to the contract. When the owner of the contract decides, they can call the function `pickWinner` which will select a random player and award them with all of the ETH from the lottery.
 
 Technical Spec for Lottery contract: 
     - Anyone’s able to send a fixed amount of Ether to the contract’s address
