@@ -46,7 +46,7 @@ describe("Lottery Contract", function () {
       expect(newPlayer).to.be.equal(addr1.address);
     });
 
-    it("Can't pick a winner if less than 4 players", async () => {
+    it("Can't pick a winner if less than 3 players", async () => {
       await addr1.sendTransaction({
         to: lottery.address,
         value: parseEther("0.1"),
