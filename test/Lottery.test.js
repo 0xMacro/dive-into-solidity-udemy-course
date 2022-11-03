@@ -3,6 +3,8 @@ const { BigNumber } = require("ethers");
 const { parseEther, formatEther } = require("ethers/lib/utils");
 const { ethers, waffle } = require("hardhat");
 
+
+
 describe("Lottery Contract", function () {
   let owner, addr1, addr2, lottery;
   let provider = waffle.provider;
@@ -80,6 +82,24 @@ describe("Lottery Contract", function () {
       const winnerBalance = await provider.getBalance(winner);
       // With hardhat, by default, all test signers have 10000 ETH, so we check if the winner has more than that
       expect(winnerBalance.gt(BigNumber.from(parseEther("10000")))).to.be.true;
+      // Expect that players array is empty
+      expect(await lottery.players.length).to.be.equal(0);
+    });
+
+    it("After winner is picked, then players array is reset", async () => {
+      // Make 4 players enter the game
+      for (let i = 0; i < 4; i++) {
+        await addrs[i].sendTransaction({
+          to: lottery.address,
+          value: parseEther("0.1"),
+        });
+      }
+
+      await lottery.pickWinner();
+      const winner = await lottery.gameWinners(0);
+
+      // Expect that players array is empty
+      expect(await lottery.players.length).to.be.equal(0);
     });
   });
 });
