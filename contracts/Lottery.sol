@@ -22,14 +22,14 @@ contract Lottery {
 
     // returning the contract's balance in wei
     function getBalance() public view returns (uint256) {
-        // TODO: restrict this function so only the owner is allowed to call it
+        // TODO: restrict this function so only the owner is allowed to call it, otherwise, make it revert with an "ONLY_OWNER" error
         // TODO: return the balance of this address
     }
 
     // selecting the winner
     function pickWinner() public {
         // TODO: only the owner can pick a winner 
-        // TODO: owner can only pick a winner if there are at least 3 players in the lottery
+        // TODO: owner can only pick a winner if there are at least 3 players in the lottery, otherwise, make it revert with an "NOT_ENOUGH_PLAYERS" error
 
         uint256 r = random();
         address winner;
